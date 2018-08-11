@@ -1,0 +1,89 @@
+<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+						
+						<?php
+							$sql_scrollable = "SELECT * FROM scrollable";
+							$query_scrollable = $con->query($sql_scrollable);
+							$image_number = $query_scrollable->num_rows;
+							
+							if($image_number > 0){
+								
+								$a = 0;
+								for($c = 1; $c <=$image_number; $c++ ){
+															
+									
+									$a++;
+									
+									if($a == 1){
+										echo"<li data-target='#slider-carousel' data-slide-to='0' class='active'></li>";
+									}
+									else{
+										$b = $a - 1;
+										echo"<li data-target='#slider-carousel' data-slide-to='$b'></li>";
+									}
+								}
+							}
+							?>
+						</ol>
+											
+						<div class="carousel-inner">
+						
+						<?php
+							$d = 0;
+							$rowcounter = 0;
+							$closerow = 0;
+							
+							while($row_scrollable = mysqli_fetch_array($query_scrollable)){
+							 $d++;
+									$description = $row_scrollable['description'];
+									$imagedisplay = $row_scrollable['imagename'];
+								if($d == 1){
+									
+							?>
+							
+							
+								<div class="item active">
+									<div class="col-sm-6">
+										<h1><span>Excotiscent</h1>
+										<h2>Buy and get fast Delivery</h2>
+										<p><?php echo"$description"; ?></p>
+										<button type="button" class="btn btn-default get">Get it now</button>
+									</div>
+									<div class="col-sm-6">
+										<img src="admin/operations/<?php echo$row_scrollable['imagename']; ?>" class="girl img-responsive"  alt="" />
+										
+									</div>
+								</div>
+							<?php
+								}
+							else{
+							?>
+							
+							<div class="item">
+								<div class="col-sm-6">
+								<h1><span>exotiscent</h1>
+									<h2>100% Reliable</h2>
+									<p><?php echo"$description"; ?></p>
+									<button type="button" class="btn btn-default get">Get it now</button>
+								</div>
+								<div class="col-sm-6">
+								<img src="admin/operations/<?php echo$row_scrollable['imagename']; ?>" class="girl img-responsive"  alt="" />
+									
+								</div>
+							</div>
+							
+							<?php
+							}
+							}
+							?>
+							
+						</div>
+	
+							
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
